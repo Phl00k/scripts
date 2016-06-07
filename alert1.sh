@@ -6,7 +6,7 @@ FILE=~/hlog.txt
 cnt=$(cat $FILE | wc -l)
 
 if [ -f $FILE ]; then
-  echo "Updating and scanning $FILE ..."
+  echo "Updating then scanning $FILE..."
 if [ $cnt -gt 3 ]; then
   echo "Problem identified on $HOSTNAME... More than 3 returns... Sending alert emails..."
   echo "### Please Check $HOSTNAME. The above drive(s) are causing blockdev errors. Recommend Disk Replacement, Reboot if needed ###" >> $FILE
