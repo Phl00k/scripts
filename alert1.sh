@@ -12,7 +12,6 @@ if [ $cnt -lt 3] ;
 then
 echo "Systems look good captian"
 fi
-
 if [ -f $FILE ];
 then
 echo "Scanning $FILE ..."
