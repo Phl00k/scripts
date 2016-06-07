@@ -1,10 +1,12 @@
 #!/bin/bash
-
+#sends processor status for uninterruptible hung disks to file hlog.txt (overwrites)
 ps aux | grep "blockdev --getsize64 /dev/sd*" | awk '{print $13}' >~/hlog.txt
 
+#sets variables for $FLIE and $cnt (cnt = lines in $FILE)
 FILE=~/hlog.txt
 cnt=$(cat $FILE | wc -l)
 
+#confirms $FILE exists, checks checks for > 3 lines of text, emails alert or gives all clear message
 if [ -f $FILE ]; then
   echo "Updating then scanning $FILE..."
 if [ $cnt -gt 3 ]; then
