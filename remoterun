@@ -1,22 +1,22 @@
 #!/bin/bash
 
-ssh sf1-ost01 "bash -s" -- < . ~/scripts/alert.sh "-time" "bye"
+ssh root@sf1-ost01 "bash -s" -- < . ~/scripts/alert.sh "-time" "bye"
 -time bye
-ssh sf1-ost02 "bash -s" -- < . ~/scripts/alert.sh "-time" "bye"
+ssh root@sf1-ost02 "bash -s" -- < . ~/scripts/alert.sh "-time" "bye"
 -time bye
-ssh sf1-ost03 "bash -s" -- < . ~/scripts/alert.sh "-time" "bye"
+ssh root@sf1-ost03 "bash -s" -- < . ~/scripts/alert.sh "-time" "bye"
 -time bye
-ssh sf1-ost04 "bash -s" -- < . ~/scripts/alert.sh "-time" "bye"
+ssh root@sf1-ost04 "bash -s" -- < . ~/scripts/alert.sh "-time" "bye"
 -time bye
-ssh sf1-ost05 "bash -s" -- < . ~/scripts/alert.sh "-time" "bye"
+ssh root@sf1-ost05 "bash -s" -- < . ~/scripts/alert.sh "-time" "bye"
 -time bye
-ssh sf1-ost06 "bash -s" -- < . ~/scripts/alert.sh "-time" "bye"
+ssh root@sf1-ost06 "bash -s" -- < . ~/scripts/alert.sh "-time" "bye"
 -time bye
-ssh sf1-ost07 "bash -s" -- < . ~/scripts/alert.sh "-time" "bye"
+ssh root@sf1-ost07 "bash -s" -- < . ~/scripts/alert.sh "-time" "bye"
 -time bye
-ssh sf1-ost08 "bash -s" -- < . ~/scripts/alert.sh "-time" "bye"
+ssh root@sf1-ost08 "bash -s" -- < . ~/scripts/alert.sh "-time" "bye"
 -time bye
-ssh sf1-ost09 "bash -s" -- < . ~/scripts/alert.sh "-time" "bye"
+ssh root@sf1-ost09 "bash -s" -- < . ~/scripts/alert.sh "-time" "bye"
 -time bye
-ssh sf1-ost10 "bash -s" -- < . ~/scripts/alert.sh "-time" "bye"
+ssh root@sf1-ost10 "bash -s" -- < . ~/scripts/alert.sh "-time" "bye"
 -time bye
