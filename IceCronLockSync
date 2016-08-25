@@ -1,0 +1,45 @@
+# location - /etc/crontab
+# need to make utah_sweep script
+
+
+*/1 * * * * root /usr/local/bin/lockrun --lockfile=/var/run/utahice.lockrun -- bash /scripts/sweeps/utah_sweep
+
+#Utah mounted on SxS at /mnt/UtahIce
+#Incoming media to land at /mnt/UtahIce/incoming
+
+#sweep script goes in /scripts/sweeps/utah_sweep
+
+#!/bin/bash
+if [ $(ls -1A /mnt/sxs/Utah_Send | wc -l) -gt 0 ] ; then bash /scripts/utah ; fi
+exit 0
+
+# script to go to /scripts/utah
+
+#!/bin/bash
+#
+mv /mnt/sxs/Utah_Send/* /mnt/UtahIce/incoming
+#
+exit 0
+
+
+#rsync 
+#rsync (Everyone seems to like -z, but it is much slower for me)
+
+#a: archive mode - rescursive, preserves owner, preserves permissions, preserves modification times, preserves group, copies symlinks as symlinks, preserves device files.
+#H: preserves hard-links
+#A: preserves ACLs
+#X: preserves extended attributes
+#x: don't cross file-system boundaries
+#v: increase verbosity
+#--numeric-ds: don't map uid/gid values by user/group name
+#--delete: delete extraneous files from dest dirs (differential clean-up during sync)
+#--progress: show progress during transfer
+#ssh
+
+#T: turn off pseudo-tty to decrease cpu load on destination.
+#c arcfour: use the weakest but fastest SSH encryption. Must specify "Ciphers arcfour" in sshd_config on destination.
+#o Compression=no: Turn off SSH compression.
+#x: turn off X forwarding if it is on by default.
+
+
+rsync -aHAXxv --numeric-ids --delete --progress -e "ssh -i /cron/sf1-sxs-rsync-key -T -c arcfour -o Compression=no -x" /mnt/sxs/Utah_Send/ root@10.209.1.230:/mnt/ice01/incoming/
