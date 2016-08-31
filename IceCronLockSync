@@ -42,4 +42,4 @@ exit 0
 #x: turn off X forwarding if it is on by default.
 
 
-rsync -aHAXxv --numeric-ids --delete --progress -e "ssh -i /cron/sf1-sxs-rsync-key -T -c arcfour -o Compression=no -x" /mnt/sxs/Utah_Send/ root@10.209.1.230:/mnt/ice01/incoming/
+rsync -aHAXxv --numeric-ids --delete --progress -e "ssh -i /cron/sf1-sxs-rsync-key -T -o Compression=no -x" /mnt/sxs/Utah_Send/ root@10.209.1.230:/mnt/ice01/incoming/
