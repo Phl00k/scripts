@@ -1,0 +1,92 @@
+#Crontab
+#cat /etc/crontab
+
+SHELL=/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+MAILTO=root
+HOME=/
+
+# For details see man 4 crontabs
+
+# Example of job definition:
+# .---------------- minute (0 - 59)
+# |  .------------- hour (0 - 23)
+# |  |  .---------- day of month (1 - 31)
+# |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
+# |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
+# |  |  |  |  |
+# *  *  *  *  * user-name command to be executed
+
+#*/1 * * * * root /usr/local/bin/lockrun --lockfile=/var/run/utahice.lockrun -- bash /scripts/sweeps/utah_sweep
+
+#*/1 * * * * root /usr/local/bin/lockrun --lockfile=/var/run/utahice.lockrun -- bash /scripts/utah
+
+*/1 * * * * root /usr/local/bin/lockrun --lockfile=/var/run/toutah.lockrun -- bash /scripts/toutah-5-seconds.sh
+
+
+
+
+
+#cat /scripts/utah
+#sending to utah from sf
+
+#!/bin/bash
+#
+rsync -aHAXxv --numeric-ids --delete --progress -e "ssh -i /cron/sf1-sxs-rsync-key -T -o Compression=no -x" /mnt/sxs/Utah_Send/ root@10.209.1.230:/mnt/ice01/incoming/
+#
+exit 0
+
+
+
+
+#make script executible:
+chmod 755 /scripts/scriptname
+chmod +x /scripts/scriptname
+
+
+
+
+#run script every 5 seconds:
+#cat /scripts/toutah-5-seconds.sh
+
+
+#!/bin/bash
+
+while true
+do
+ /usr/local/bin/lockrun --lockfile=/var/run/utahice.lockrun -- bash /scripts/utah
+ sleep 5
+done
+
+
+
+
+
+
+#fstab example:
+#cat /etc/fstab
+
+#
+# /etc/fstab
+# Created by anaconda on Thu Feb 28 18:17:17 2013
+#
+# Accessible filesystems, by reference, are maintained under '/dev/disk'
+# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info
+#
+/dev/mapper/vg_sf1sxs-lv_root /                       ext4    defaults        1 1
+UUID=3a0006c6-2e2e-40a3-8109-164e7a433617 /boot                   ext4    defaults        1 2
+/dev/mapper/vg_sf1sxs-lv_home /home                   ext4    defaults        1 2
+/dev/mapper/vg_sf1sxs-lv_swap swap                    swap    defaults        0 0
+tmpfs                   /dev/shm                tmpfs   defaults        0 0
+devpts                  /dev/pts                devpts  gid=5,mode=620  0 0
+sysfs                   /sys                    sysfs   defaults        0 0
+proc                    /proc                   proc    defaults        0 0
+/dev/sda                /mnt/sxs                xfs     defaults        0 0 
+#//10.209.1.230/UtahIce /mnt/UtahIce           cifs    defaults        0 0
+#/mnt/UtahIce           /mnt/Utah_Vanilla_Ice  cifs    defaults        0 0
+
+
+
+
+
+
